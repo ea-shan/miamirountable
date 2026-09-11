@@ -15,11 +15,21 @@ const questrial = Questrial({
 });
 
 export const metadata: Metadata = {
-  title: "B2B SaaS Growth Conference | GrowthForia 2026",
+  title: "Miami Executive Roundtable | Express Analytics",
   description:
-    "GrowthForia was made exclusively for senior marketing professionals in B2B SaaS. Come with the hard questions, leave with ideas, answers and experiments.",
+    "A private, off-the-record roundtable for senior Data, AI and Marketing leaders. Twelve seats at COTE Miami. September and October 2026.",
+  keywords: [
+    "Miami executive roundtable",
+    "Express Analytics",
+    "AI roundtable Miami",
+    "enterprise AI dinner",
+    "COTE Miami",
+    "invitation-only executive dinner",
+    "data and AI leaders",
+  ],
   icons: {
-    icon: "/sites/www-growthforia-com-b1cbb1ee/root-8a5edab2/images/favicon.png",
+    icon: "/sites/www-growthforia-com-b1cbb1ee/root-8a5edab2/logos/ea-logo-red.png",
+    apple: "/sites/www-growthforia-com-b1cbb1ee/root-8a5edab2/logos/ea-logo-red.png",
   },
 };
 
@@ -35,3 +45,4 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     </html>
   );
 }
+
