@@ -38,6 +38,7 @@ export default function Home() {
       <NewsletterSection />
       <SectionLine />
       <FaqSection />
+      <SectionLine />
       <SiteFooter />
       <CookieBanner />
     </main>
