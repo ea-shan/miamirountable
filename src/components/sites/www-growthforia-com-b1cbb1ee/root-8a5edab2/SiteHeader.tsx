@@ -20,12 +20,12 @@ export function SiteHeader() {
         <div className="flex max-w-full items-center rounded-[20px] border border-white/10 bg-[#2a2a2c]/50 py-1.5 pr-1.5 pl-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_8px_24px_rgba(0,0,0,0.25)] backdrop-blur-xl backdrop-saturate-150 sm:pr-2 sm:pl-4">
           <a
             href="/"
-            className="mr-3 flex min-w-0 shrink-0 cursor-pointer items-center gap-0 sm:mr-5"
+            className="mr-3 flex min-w-0 shrink-0 cursor-pointer items-center gap-1 sm:mr-5"
             aria-label="express analytics"
           >
             <img
               src={`${ASSET}/logos/ea-logo.png`}
-              alt=""
+              alt="express analytics logo"
               width={40}
               height={40}
               className="h-9 w-9 shrink-0 object-contain object-center md:h-10 md:w-10"
