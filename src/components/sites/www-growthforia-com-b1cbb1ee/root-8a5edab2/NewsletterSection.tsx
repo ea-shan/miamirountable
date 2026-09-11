@@ -12,6 +12,7 @@ import {
 import { CheckIcon, ChevronDownIcon } from "../shared/icons";
 
 type Step = 1 | 2 | 3;
+type FitStep = 1 | 2 | 3;
 
 const STEPS = [
   { n: 1 as const, label: "Evening" },
@@ -19,8 +20,26 @@ const STEPS = [
   { n: 3 as const, label: "Fit" },
 ];
 
+const NEXT = [
+  {
+    n: "01",
+    title: "Submit your request",
+    body: "Contact details plus three quick questions on your Data/AI priorities, about 90 seconds.",
+  },
+  {
+    n: "02",
+    title: "We review within 48 hours",
+    body: "Jorge and our team confirm fit against company, seniority/function, geography and current priorities to keep the table balanced.",
+  },
+  {
+    n: "03",
+    title: "Personal confirmation",
+    body: "You hear back directly, either your seat is confirmed, or we let you know you're on the list for a future evening.",
+  },
+];
+
 const fieldClass =
-  "h-11 min-h-11 w-full rounded-xl border border-white/12 bg-[#0b0c0e] px-4 text-[16px] text-[#f6f3f0] placeholder:text-white/35 outline-none transition-colors duration-200 focus-visible:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e8c48a]";
+  "h-11 min-h-11 w-full rounded-md bg-white px-4 text-[16px] text-[#0b0c0e] placeholder:text-[#0b0c0e]/40 outline-none transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b0c0e]";
 
 function Field({
   id,
@@ -35,12 +54,12 @@ function Field({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="text-[13px] leading-5 text-white/70">
+      <label htmlFor={id} className="text-[13px] leading-5 text-[#0b0c0e]">
         {label}
       </label>
       {children}
       {error ? (
-        <p id={`${id}-error`} className="text-[12px] text-[#ffb3c2]" role="alert">
+        <p id={`${id}-error`} className="text-[12px] text-[#3f0a12]" role="alert">
           {error}
         </p>
       ) : (
@@ -66,7 +85,7 @@ function Choice({
   children: string;
 }) {
   return (
-    <label className="flex min-h-11 cursor-pointer items-center gap-3 rounded-xl border border-white/12 bg-[#0b0c0e] px-4 py-2.5 transition-colors duration-200 hover:border-white/25 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[#e8c48a]">
+    <label className="flex min-h-11 cursor-pointer items-center gap-3 rounded-md bg-white px-4 py-2.5 transition-colors duration-200 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[#0b0c0e]">
       <input
         type={type}
         name={name}
@@ -76,21 +95,21 @@ function Choice({
       />
       <span
         aria-hidden
-        className={`grid size-4 shrink-0 place-items-center border border-white/35 ${
+        className={`grid size-4 shrink-0 place-items-center border border-[#0b0c0e]/35 ${
           type === "radio" ? "rounded-full" : "rounded-[3px]"
-        } ${checked ? "border-[#e8c48a] bg-[#e8c48a]" : ""}`}
+        } ${checked ? "border-[#0b0c0e] bg-[#0b0c0e]" : ""}`}
       >
         {checked ? (
           <span
             className={
               type === "radio"
-                ? "size-1.5 rounded-full bg-[#0b0c0e]"
-                : "block size-2 border-b-2 border-l-2 border-[#0b0c0e] translate-y-[-1px] rotate-[-45deg]"
+                ? "size-1.5 rounded-full bg-white"
+                : "block size-2 translate-y-[-1px] rotate-[-45deg] border-b-2 border-l-2 border-white"
             }
           />
         ) : null}
       </span>
-      <span className="text-[14px] leading-snug text-[#f6f3f0]">{children}</span>
+      <span className="text-[14px] leading-snug text-[#0b0c0e]">{children}</span>
     </label>
   );
 }
@@ -99,6 +118,7 @@ export function NewsletterSection() {
   const uid = useId();
   const headingRef = useRef<HTMLParagraphElement>(null);
   const [step, setStep] = useState<Step>(1);
+  const [fitStep, setFitStep] = useState<FitStep>(1);
   const [pending, setPending] = useState(false);
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -120,6 +140,7 @@ export function NewsletterSection() {
   function go(next: Step) {
     setErrors({});
     setFormError("");
+    if (next === 3 && step !== 3) setFitStep(1);
     setStep(next);
     queueMicrotask(() => headingRef.current?.focus());
   }
@@ -156,6 +177,17 @@ export function NewsletterSection() {
       }
       if (!outcome) next.outcome = "Select a primary business outcome.";
     }
+    setErrors(next);
+    return Object.keys(next).length === 0;
+  }
+
+  function validateFit(n: FitStep): boolean {
+    const next: FieldErrors = {};
+    if (n === 1 && !readiness) next.readiness = "Select your Data & AI readiness.";
+    if (n === 2 && (priorities.length < 1 || priorities.length > 2)) {
+      next.priorities = "Select up to two priorities.";
+    }
+    if (n === 3 && !outcome) next.outcome = "Select a primary business outcome.";
     setErrors(next);
     return Object.keys(next).length === 0;
   }
@@ -200,63 +232,73 @@ export function NewsletterSection() {
   return (
     <section
       id="cta"
-      className="relative scroll-mt-24 overflow-hidden bg-gf-lime py-16 md:py-[88px]"
+      className="relative scroll-mt-24 overflow-hidden bg-gf-lime py-16 md:py-[72px]"
     >
       <div
         aria-hidden
         className="pointer-events-none absolute top-0 left-0 h-0 w-0 border-t-[84px] border-r-[84px] border-t-[#0b0c0e] border-r-transparent"
       />
-      <div className="gf-container grid items-center gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
+      <div className="gf-container grid items-start gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
         <div>
           <p className="text-[12px] font-medium tracking-[0.16em] text-[#0b0c0e]/55 uppercase">
             Twelve seats · COTE Miami
           </p>
-          <h2 className="font-display mt-4 max-w-[14ch] text-[40px] leading-[1.05] tracking-[-0.03em] text-[#0b0c0e] md:text-[56px]">
-            What happens <span className="italic">next?</span>
+          <h2 className="font-display mt-4 max-w-[12ch] text-[40px] leading-[1.05] tracking-[-0.03em] text-[#0b0c0e] md:text-[56px]">
+            What happens next
           </h2>
+          <ol className="mt-8 space-y-6">
+            {NEXT.map((item) => (
+              <li key={item.n} className="grid grid-cols-[auto_1fr] gap-4">
+                <span className="font-display text-[22px] leading-none tracking-[-0.04em] text-[#0b0c0e]">
+                  {item.n}
+                </span>
+                <div>
+                  <p className="text-[16px] font-medium text-[#0b0c0e]">{item.title}</p>
+                  <p className="mt-1 max-w-[42ch] text-[14px] leading-[1.55] text-[#0b0c0e]/75">
+                    {item.body}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
 
-        <div
-          data-invite-card
-          className="rounded-[22px] border border-white/8 bg-[#121316] p-5 shadow-[0_24px_60px_-28px_rgba(11,12,14,0.55)] md:p-8"
-        >
+        <div>
           {sent ? (
-            <div className="grid min-h-[560px] place-items-center text-center md:min-h-[640px]">
-              <div>
-                <span className="mx-auto grid size-11 place-items-center rounded-full bg-[#e8c48a] text-[#0b0c0e]">
-                  <CheckIcon />
-                </span>
-                <p className="font-display mt-5 text-[28px] leading-tight text-[#f6f3f0]">
-                  Request received
-                </p>
-                <p className="mx-auto mt-3 max-w-[42ch] text-[14px] leading-relaxed text-white/60">
-                  Reviewed within 48 hours for company fit, seniority and current
-                  Data/AI priorities. You&apos;ll hear from Jorge&apos;s team
-                  personally either way.
-                </p>
-              </div>
+            <div className="py-6">
+              <span className="grid size-11 place-items-center rounded-full bg-[#0b0c0e] text-white">
+                <CheckIcon />
+              </span>
+              <p className="font-display mt-5 text-[28px] leading-tight text-[#0b0c0e]">
+                Request received
+              </p>
+              <p className="mt-3 max-w-[42ch] text-[14px] leading-relaxed text-[#0b0c0e]/70">
+                Reviewed within 48 hours for company fit, seniority and current
+                Data/AI priorities. You&apos;ll hear from Jorge&apos;s team
+                personally either way.
+              </p>
             </div>
           ) : (
             <>
-              <div className="mb-6 flex items-center gap-2">
+              <div className="mb-5 flex items-center gap-2">
                 {STEPS.map((s, i) => (
                   <div key={s.n} className="flex flex-1 items-center gap-2">
                     <span
                       className={`grid size-7 place-items-center rounded-full text-[11px] font-medium ${
                         step === s.n
-                          ? "bg-[#e8c48a] text-[#0b0c0e]"
+                          ? "bg-[#0b0c0e] text-white"
                           : step > s.n
-                            ? "bg-white/12 text-[#f6f3f0]"
-                            : "bg-white/6 text-white/40"
+                            ? "bg-[#0b0c0e]/20 text-[#0b0c0e]"
+                            : "bg-[#0b0c0e]/10 text-[#0b0c0e]/45"
                       }`}
                     >
                       {s.n}
                     </span>
-                    <span className="hidden text-[12px] text-white/55 sm:inline">
+                    <span className="hidden text-[12px] text-[#0b0c0e]/70 sm:inline">
                       {s.label}
                     </span>
                     {i < STEPS.length - 1 ? (
-                      <span className="h-px flex-1 bg-white/10" />
+                      <span className="h-px flex-1 bg-[#0b0c0e]/15" />
                     ) : null}
                   </div>
                 ))}
@@ -264,21 +306,16 @@ export function NewsletterSection() {
 
               <p ref={headingRef} tabIndex={-1} className="sr-only">
                 Step {step} of 3
+                {step === 3 ? `, question ${fitStep} of 3` : ""}
               </p>
               <p className="sr-only" aria-live="polite">
                 Step {step} of 3
+                {step === 3 ? `, question ${fitStep} of 3` : ""}
               </p>
 
-              <div className="grid h-[34rem] overflow-y-auto overscroll-contain md:h-[36rem]">
-                <fieldset
-                  className={`col-start-1 row-start-1 min-h-[34rem] border-0 p-0 transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none md:min-h-[36rem] ${
-                    step === 1
-                      ? "relative z-10 opacity-100"
-                      : "pointer-events-none invisible opacity-0"
-                  }`}
-                  disabled={step !== 1}
-                >
-                  <legend className="mb-4 text-[15px] text-white/75">
+              {step === 1 ? (
+                <fieldset className="border-0 p-0">
+                  <legend className="mb-3 text-[15px] text-[#0b0c0e]">
                     Which evening are you requesting?
                   </legend>
                   <div className="relative">
@@ -296,29 +333,24 @@ export function NewsletterSection() {
                         </option>
                       ))}
                     </select>
-                    <span className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-white/55">
+                    <span className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-[#0b0c0e]/55">
                       <ChevronDownIcon />
                     </span>
                   </div>
                   {errors.evening ? (
-                    <p id={`${uid}-evening-error`} className="mt-2 text-[12px] text-[#ffb3c2]" role="alert">
+                    <p id={`${uid}-evening-error`} className="mt-2 text-[12px] text-[#3f0a12]" role="alert">
                       {errors.evening}
                     </p>
                   ) : null}
-                  <p className="mt-4 text-[15px] leading-relaxed text-[#e8c48a]">
+                  <p className="mt-4 text-[15px] leading-relaxed text-[#0b0c0e]">
                     Requesting a seat for {evening} · COTE Miami
                   </p>
                 </fieldset>
+              ) : null}
 
-                <fieldset
-                  className={`col-start-1 row-start-1 min-h-[34rem] border-0 p-0 transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none md:min-h-[36rem] ${
-                    step === 2
-                      ? "relative z-10 opacity-100"
-                      : "pointer-events-none invisible opacity-0"
-                  }`}
-                  disabled={step !== 2}
-                >
-                  <legend className="mb-4 text-[15px] text-white/75">Contact information</legend>
+              {step === 2 ? (
+                <fieldset className="border-0 p-0">
+                  <legend className="mb-3 text-[15px] text-[#0b0c0e]">Contact information</legend>
                   <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     <Field id={`${uid}-first`} label="First name" error={errors.firstname}>
                       <input
@@ -432,19 +464,17 @@ export function NewsletterSection() {
                     </div>
                   </div>
                 </fieldset>
+              ) : null}
 
-                <fieldset
-                  className={`col-start-1 row-start-1 min-h-[34rem] border-0 p-0 transition duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none md:min-h-[36rem] ${
-                    step === 3
-                      ? "relative z-10 opacity-100"
-                      : "pointer-events-none invisible opacity-0"
-                  }`}
-                  disabled={step !== 3}
-                >
+              {step === 3 ? (
+                <fieldset className="border-0 p-0">
                   <legend className="sr-only">Qualification</legend>
-                  <div className="flex flex-col gap-5">
+                  <p className="mb-3 text-[13px] text-[#0b0c0e]/70">
+                    Question {fitStep} of 3
+                  </p>
+                  {fitStep === 1 ? (
                     <div>
-                      <p id={`${uid}-r`} className="mb-2 text-[14px] text-white/75">
+                      <p id={`${uid}-r`} className="mb-2 text-[14px] text-[#0b0c0e]">
                         1. Your organization&apos;s current Data & AI readiness
                       </p>
                       <div role="radiogroup" aria-labelledby={`${uid}-r`} className="grid gap-2">
@@ -461,13 +491,15 @@ export function NewsletterSection() {
                         ))}
                       </div>
                       {errors.readiness ? (
-                        <p className="mt-2 text-[12px] text-[#ffb3c2]" role="alert">
+                        <p className="mt-2 text-[12px] text-[#3f0a12]" role="alert">
                           {errors.readiness}
                         </p>
                       ) : null}
                     </div>
+                  ) : null}
+                  {fitStep === 2 ? (
                     <div>
-                      <p id={`${uid}-p`} className="mb-2 text-[14px] text-white/75">
+                      <p id={`${uid}-p`} className="mb-2 text-[14px] text-[#0b0c0e]">
                         2. Top strategic priority right now (select up to 2)
                       </p>
                       <div role="group" aria-labelledby={`${uid}-p`} className="grid gap-2">
@@ -484,13 +516,15 @@ export function NewsletterSection() {
                         ))}
                       </div>
                       {errors.priorities ? (
-                        <p className="mt-2 text-[12px] text-[#ffb3c2]" role="alert">
+                        <p className="mt-2 text-[12px] text-[#3f0a12]" role="alert">
                           {errors.priorities}
                         </p>
                       ) : null}
                     </div>
+                  ) : null}
+                  {fitStep === 3 ? (
                     <div>
-                      <p id={`${uid}-o`} className="mb-2 text-[14px] text-white/75">
+                      <p id={`${uid}-o`} className="mb-2 text-[14px] text-[#0b0c0e]">
                         3. Primary business outcome you&apos;re advancing with AI
                       </p>
                       <div role="radiogroup" aria-labelledby={`${uid}-o`} className="grid gap-2">
@@ -507,28 +541,28 @@ export function NewsletterSection() {
                         ))}
                       </div>
                       {errors.outcome ? (
-                        <p className="mt-2 text-[12px] text-[#ffb3c2]" role="alert">
+                        <p className="mt-2 text-[12px] text-[#3f0a12]" role="alert">
                           {errors.outcome}
                         </p>
                       ) : null}
                     </div>
-                  </div>
+                  ) : null}
                 </fieldset>
-              </div>
+              ) : null}
 
               {formError ? (
-                <p className="mt-4 text-[13px] text-[#ffb3c2]" role="alert">
+                <p className="mt-4 text-[13px] text-[#3f0a12]" role="alert">
                   {formError}
                 </p>
               ) : null}
 
               <div className="mt-6 flex flex-col gap-3">
-                {step === 3 ? (
+                {step === 3 && fitStep === 3 ? (
                   <button
                     type="button"
                     onClick={onSubmit}
                     disabled={pending}
-                    className="flex h-11 min-h-11 cursor-pointer items-center justify-center rounded-full bg-[#e8c48a] text-[15px] font-medium text-[#0b0c0e] transition duration-200 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+                    className="flex h-11 min-h-11 cursor-pointer items-center justify-center rounded-full bg-[#0b0c0e] text-[15px] font-medium text-white transition duration-200 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {pending ? "Sending…" : "Request an Invitation"}
                   </button>
@@ -536,26 +570,37 @@ export function NewsletterSection() {
                   <button
                     type="button"
                     onClick={() => {
-                      if (validateStep(step)) go((step + 1) as Step);
+                      if (step < 3) {
+                        if (validateStep(step)) go((step + 1) as Step);
+                        return;
+                      }
+                      if (validateFit(fitStep)) setFitStep((n) => (n + 1) as FitStep);
                     }}
-                    className="flex h-11 min-h-11 cursor-pointer items-center justify-center rounded-full bg-[#f6f3f0] text-[15px] font-medium text-[#0b0c0e] transition duration-200 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.98]"
+                    className="flex h-11 min-h-11 cursor-pointer items-center justify-center rounded-full bg-[#0b0c0e] text-[15px] font-medium text-white transition duration-200 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.98]"
                   >
                     Continue
                   </button>
                 )}
                 <button
                   type="button"
-                  onClick={() => go((step - 1) as Step)}
+                  onClick={() => {
+                    if (step === 3 && fitStep > 1) {
+                      setErrors({});
+                      setFitStep((n) => (n - 1) as FitStep);
+                      return;
+                    }
+                    go((step - 1) as Step);
+                  }}
                   disabled={step === 1}
-                  className={`flex h-11 min-h-11 items-center justify-center text-[14px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e8c48a] ${
+                  className={`flex h-11 min-h-11 items-center justify-center text-[14px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b0c0e] ${
                     step === 1
                       ? "invisible"
-                      : "cursor-pointer text-white/60 hover:text-white"
+                      : "cursor-pointer text-[#0b0c0e]/60 hover:text-[#0b0c0e]"
                   }`}
                 >
                   Back
                 </button>
-                <p className="text-center text-[12px] leading-relaxed text-white/45">
+                <p className="text-center text-[12px] leading-relaxed text-[#0b0c0e]/55">
                   Reviewed within 48 hours for company fit, seniority and current
                   Data/AI priorities. You&apos;ll hear from Jorge&apos;s team
                   personally either way.
