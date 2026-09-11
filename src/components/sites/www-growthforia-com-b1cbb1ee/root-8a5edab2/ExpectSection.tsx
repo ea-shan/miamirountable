@@ -21,11 +21,8 @@ export function ExpectSection() {
   return (
     <section id="expect" className="bg-[#0b0c0e] py-20 md:py-[80px]">
       <div className="gf-container">
-        {/* <p className="text-[12px] font-medium tracking-[0.14em] text-white/70 uppercase md:text-[13px]">
-          What to Expect
-        </p> */}
-        <h2 className="font-display mt-4 text-[32px] leading-[1.1] tracking-[-0.03em] text-white md:text-[48px]">
-          What to Expect
+        <h2 className="text-center text-[40px] leading-[1.1] font-medium md:text-[48px] md:leading-[52.8px]">
+          What to <span className="gf-italic">Expect</span>
         </h2>
 
         <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
@@ -36,7 +33,7 @@ export function ExpectSection() {
             >
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_110%,rgba(255,0,60,0.22),transparent_58%)]"
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_42%_38%_at_94%_108%,rgba(255,0,59,0.28),transparent_62%)]"
               />
               <p className="font-display relative text-[56px] leading-none tracking-[-0.04em] text-white md:text-[64px]">
                 {frame.n}
