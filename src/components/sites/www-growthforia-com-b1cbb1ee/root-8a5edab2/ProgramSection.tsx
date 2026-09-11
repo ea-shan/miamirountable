@@ -15,9 +15,12 @@ export function ProgramSection() {
         <div className="mt-12 space-y-8">
           {program.map((item) => (
             <article key={item.n}>
-              <p className="text-[16px] text-white md:text-[18px]">{item.n}</p>
-              <div className="mt-3 grid min-h-[96px] grid-cols-[72px_1fr] overflow-hidden rounded-[20px] bg-[#121316] md:grid-cols-[112px_1fr]">
-                <div className="bg-gf-lime" aria-hidden />
+              <div className="grid min-h-[96px] grid-cols-[72px_1fr] overflow-hidden rounded-[20px] bg-[#121316] md:grid-cols-[112px_1fr]">
+                <div className="grid place-items-center bg-gf-lime">
+                  <span className="font-display text-[28px] leading-none tracking-[-0.04em] text-white md:text-[36px]">
+                    {item.n}
+                  </span>
+                </div>
                 <div className="flex flex-col justify-center px-5 py-5 md:px-8">
                   <h3 className="text-[18px] leading-snug font-medium text-white md:text-[22px]">
                     {item.title}
