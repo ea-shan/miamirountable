@@ -39,8 +39,6 @@ export function SiteHeader() {
               <a
                 key={link.label}
                 href={link.href}
-                target={link.external ? "_blank" : undefined}
-                rel={link.external ? "noreferrer" : undefined}
                 className="cursor-pointer py-2 text-[13px] font-medium uppercase tracking-[0.06em] text-white/90 transition-colors duration-200 hover:text-gf-lime focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gf-lime"
               >
                 {link.label}
@@ -66,8 +64,6 @@ export function SiteHeader() {
               <a
                 key={link.label}
                 href={link.href}
-                target={link.external ? "_blank" : undefined}
-                rel={link.external ? "noreferrer" : undefined}
                 onClick={() => setOpen(false)}
                 className="min-h-11 cursor-pointer py-2 text-[15px] font-medium uppercase tracking-[0.06em] transition-colors duration-200 hover:text-gf-lime focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gf-lime"
               >
