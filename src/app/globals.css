@@ -1,26 +1,165 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --gf-bg: #0b0c0e;
+  --gf-bg-olive: #191914;
+  --gf-ink: #f6f3f0;
+  --gf-lime: #ff003c;
+  --gf-lime-deep: #ff003c;
+  --gf-rail: 51.5px;
+  --background: #0b0c0e;
+  --foreground: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-gf-bg: var(--gf-bg);
+  --color-gf-olive: var(--gf-bg-olive);
+  --color-gf-ink: var(--gf-ink);
+  --color-gf-lime: var(--gf-lime);
+  --font-sans: var(--font-urbanist);
+  --font-display: var(--font-questrial);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--gf-bg);
+  color: #fff;
+  font-family: var(--font-urbanist), sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .gf-marquee-track {
+    animation: none !important;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 2rem;
+    padding-inline: 1.25rem;
+  }
+  .gf-marquee-track [aria-hidden="true"] {
+    display: none;
+  }
+}
+
+.gf-container {
+  width: 100%;
+  max-width: 1344px;
+  margin-inline: auto;
+  padding-inline: 48px;
+}
+
+@media (max-width: 768px) {
+  .gf-container {
+    padding-inline: 20px;
+  }
+}
+
+.gf-section-line {
+  height: 1px;
+  background: rgba(246, 243, 240, 0.16);
+  position: relative;
+}
+
+.gf-section-line::before,
+.gf-section-line::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border: 1px solid rgba(246, 243, 240, 0.35);
+  border-radius: 0;
+  transform: translateY(-50%);
+  background: var(--gf-bg);
+}
+
+.gf-section-line::before {
+  left: 48px;
+}
+
+.gf-section-line::after {
+  right: 48px;
+}
+
+/* Full-page vertical rails through the divider-square centers */
+.gf-page::before,
+.gf-page::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(246, 243, 240, 0.18);
+  pointer-events: none;
+  z-index: 40;
+}
+
+.gf-page::before {
+  left: var(--gf-rail);
+}
+
+.gf-page::after {
+  right: var(--gf-rail);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --gf-rail: 19.5px;
+  }
+  .gf-section-line::before {
+    left: 16px;
+  }
+  .gf-section-line::after {
+    right: 16px;
+  }
+}
+
+@keyframes gf-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.gf-marquee-clip {
+  overflow: hidden;
+  margin-inline: calc(var(--gf-rail) + 1px);
+}
+
+.gf-marquee-motion {
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 28px,
+    #000 calc(100% - 28px),
+    transparent
+  );
+}
+
+.gf-marquee-track {
+  animation: gf-marquee 48s linear infinite;
+  width: max-content;
+}
+
+.gf-marquee-motion:hover .gf-marquee-track,
+.gf-marquee-motion:focus-within .gf-marquee-track {
+  animation-play-state: paused;
+}
+
+.gf-italic {
+  font-style: italic;
+  color: var(--gf-lime);
+  font-weight: 300;
 }

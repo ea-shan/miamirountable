@@ -1,0 +1,83 @@
+import { ASSET, HERO_VIDEO } from "@/lib/growthforia/content";
+import { CheckIcon, SeatsIcon } from "../shared/icons";
+import { LimeCta } from "./LimeCta";
+
+function HeroDate({ month, day }: { month: string; day: string }) {
+  return (
+    <p className="flex items-center gap-2 font-display leading-none">
+      <span className="[writing-mode:vertical-rl] rotate-180 text-[18px] tracking-[0.08em] text-gf-lime md:text-[28px]">
+        2026
+      </span>
+      <span className="text-white">
+        <span className="block text-[36px] md:text-[56px]">{month}</span>
+        <span className="block text-[36px] md:text-[56px]">{day}</span>
+      </span>
+    </p>
+  );
+}
+
+export function HeroSection() {
+  return (
+    <section className="relative min-h-[100dvh] overflow-hidden bg-[#0b0c0e]">
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster={`${ASSET}/images/hero-poster.jpg`}
+        src={HERO_VIDEO}
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0b0c0e] via-transparent to-black/25" />
+
+      <div className="gf-container relative z-10 grid w-full grid-cols-1 content-center gap-10 pt-28 pb-16 md:min-h-[100dvh] md:grid-cols-[minmax(0,620px)_1fr] md:items-center md:pb-12">
+        <div>
+          <p className="text-[12px] font-medium tracking-[0.14em] text-white/80 uppercase md:text-[13px]">
+            Miami · Private Executive Dinner · September & October 2026
+          </p>
+          <h1 className="font-display mt-4 text-[40px] leading-[0.98] tracking-[-0.03em] text-white md:text-[56px]">
+            12 Leaders. One Table.
+            <span className="mt-1 block text-gf-lime">Candid AI Conversations.</span>
+          </h1>
+          <p className="mt-5 max-w-[52ch] text-[16px] leading-[1.55] text-white/92 md:text-[18px]">
+            A private, off-the-record roundtable for senior Data, AI and
+            Marketing leaders, on what it actually takes to move AI from
+            ambition to measurable business impact. No vendor slides. No pitch.
+          </p>
+          <div className="mt-5 max-w-[48ch] text-[14px] leading-[1.5] text-white/80 md:text-[15px]">
+            <p className="font-medium text-white">COTE Miami: Private Gold Room</p>
+            <p>America&apos;s first and only Michelin-starred Korean Steakhouse</p>
+            <p className="mt-1">
+              6:30 – 9:00 PM · Networking, moderated roundtable & dinner
+            </p>
+          </div>
+          <LimeCta href="#cta" className="mt-6 h-11 min-h-11 px-6 text-[14px]">
+            Request an Invitation
+          </LimeCta>
+          <ul className="mt-3 flex flex-col gap-1 text-[13px] text-white/75 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">
+            <li className="flex min-h-11 items-center gap-2">
+              <span className="text-gf-lime">
+                <SeatsIcon />
+              </span>
+              12 seats per evening
+            </li>
+            <li className="flex min-h-11 items-center gap-2">
+              <span className="text-gf-lime">
+                <CheckIcon />
+              </span>
+              Reviewed for fit
+            </li>
+          </ul>
+        </div>
+
+        <div className="flex items-end justify-end md:self-end">
+          <div className="flex flex-col items-end gap-6 md:gap-8">
+            <HeroDate month="Sep" day="24th" />
+            <HeroDate month="Oct" day="14th" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
