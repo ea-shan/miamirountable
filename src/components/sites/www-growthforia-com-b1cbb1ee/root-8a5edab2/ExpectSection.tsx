@@ -21,9 +21,9 @@ export function ExpectSection() {
   return (
     <section id="expect" className="bg-[#0b0c0e] py-20 md:py-[80px]">
       <div className="gf-container">
-        <p className="text-[12px] font-medium tracking-[0.14em] text-white/70 uppercase md:text-[13px]">
+        {/* <p className="text-[12px] font-medium tracking-[0.14em] text-white/70 uppercase md:text-[13px]">
           What to Expect
-        </p>
+        </p> */}
         <h2 className="font-display mt-4 text-[32px] leading-[1.1] tracking-[-0.03em] text-white md:text-[48px]">
           What to Expect
         </h2>
@@ -51,7 +51,7 @@ export function ExpectSection() {
                 <div className="relative mt-auto pt-8">
                   <a
                     href={frame.cta.href}
-                    className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center rounded-full border border-white/20 text-[14px] font-medium text-white transition-colors duration-200 hover:border-gf-lime hover:text-gf-lime focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gf-lime"
+                    className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center rounded-gf-btn border border-white/20 text-[14px] font-semibold text-white transition-colors duration-200 hover:border-gf-lime hover:text-gf-lime focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gf-lime"
                   >
                     {frame.cta.label}
                   </a>
@@ -64,3 +64,4 @@ export function ExpectSection() {
     </section>
   );
 }
+

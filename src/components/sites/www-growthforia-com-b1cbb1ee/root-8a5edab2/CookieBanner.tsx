@@ -31,14 +31,14 @@ export function CookieBanner() {
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="rounded-full bg-gf-lime px-5 py-2.5 text-[14px] font-medium text-[#0b0c0e]"
+          className="rounded-gf-btn bg-gf-lime px-5 py-2.5 text-[14px] font-semibold text-[#0b0c0e]"
         >
           Accept all
         </button>
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="rounded-full bg-gf-lime px-5 py-2.5 text-[14px] font-medium text-[#0b0c0e]"
+          className="rounded-gf-btn bg-gf-lime px-5 py-2.5 text-[14px] font-semibold text-[#0b0c0e]"
         >
           Reject non-essential
         </button>
@@ -58,3 +58,4 @@ export function CookieBanner() {
     </div>
   );
 }
+

@@ -131,7 +131,7 @@ export function LocationSection() {
           </div>
         </div>
 
-        <div className="mt-10">
+        {/* <div className="mt-10">
           <p className="text-[12px] font-medium tracking-[0.14em] text-white/70 uppercase md:text-[13px]">
             Agenda
           </p>
@@ -146,7 +146,7 @@ export function LocationSection() {
             </span>
             Roundtable Discussion
           </p>
-        </div>
+        </div> */}
       </div>
     </section>
   );

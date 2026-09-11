@@ -20,6 +20,7 @@
   --color-gf-lime: var(--gf-lime);
   --font-sans: var(--font-urbanist);
   --font-display: var(--font-questrial);
+  --radius-gf-btn: 8px;
 }
 
 html {
@@ -32,6 +33,10 @@ body {
   font-family: var(--font-urbanist), sans-serif;
   font-size: 16px;
   line-height: 1.2;
+}
+
+button {
+  font-weight: 600;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -75,20 +80,21 @@ body {
   content: "";
   position: absolute;
   top: 50%;
-  width: 7px;
-  height: 7px;
-  border: 1px solid rgba(246, 243, 240, 0.35);
+  width: 4px;
+  height: 4px;
+  border: 0;
   border-radius: 0;
-  transform: translateY(-50%);
-  background: var(--gf-bg);
+  background: var(--gf-ink);
 }
 
 .gf-section-line::before {
-  left: 48px;
+  left: var(--gf-rail);
+  transform: translate(-50%, -50%);
 }
 
 .gf-section-line::after {
-  right: 48px;
+  right: var(--gf-rail);
+  transform: translate(50%, -50%);
 }
 
 /* Full-page vertical rails through the divider-square centers */
@@ -115,12 +121,6 @@ body {
 @media (max-width: 768px) {
   :root {
     --gf-rail: 19.5px;
-  }
-  .gf-section-line::before {
-    left: 16px;
-  }
-  .gf-section-line::after {
-    right: 16px;
   }
 }
 

@@ -562,7 +562,7 @@ export function NewsletterSection() {
                     type="button"
                     onClick={onSubmit}
                     disabled={pending}
-                    className="flex h-11 min-h-11 cursor-pointer items-center justify-center rounded-full bg-[#0b0c0e] text-[15px] font-medium text-white transition duration-200 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+                    className="flex h-11 min-h-11 cursor-pointer items-center justify-center rounded-gf-btn bg-[#0b0c0e] text-[15px] font-semibold text-white transition duration-200 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {pending ? "Sending…" : "Request an Invitation"}
                   </button>
@@ -576,7 +576,7 @@ export function NewsletterSection() {
                       }
                       if (validateFit(fitStep)) setFitStep((n) => (n + 1) as FitStep);
                     }}
-                    className="flex h-11 min-h-11 cursor-pointer items-center justify-center rounded-full bg-[#0b0c0e] text-[15px] font-medium text-white transition duration-200 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.98]"
+                    className="flex h-11 min-h-11 cursor-pointer items-center justify-center rounded-gf-btn bg-[#0b0c0e] text-[15px] font-semibold text-white transition duration-200 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.98]"
                   >
                     Continue
                   </button>

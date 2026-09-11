@@ -4,13 +4,27 @@ import { LimeCta } from "./LimeCta";
 
 function HeroDate({ month, day }: { month: string; day: string }) {
   return (
-    <p className="flex items-center gap-2 font-display leading-none">
-      <span className="[writing-mode:vertical-rl] rotate-180 text-[18px] tracking-[0.08em] text-gf-lime md:text-[28px]">
-        2026
+    <p className="flex items-start gap-1.5 font-display text-[36px] leading-none md:text-[56px]">
+      <span
+        aria-label="2026"
+        className="grid h-[2em] grid-rows-4 text-gf-lime"
+      >
+        <span aria-hidden className="text-[0.5em] leading-none">
+          6
+        </span>
+        <span aria-hidden className="text-[0.5em] leading-none">
+          2
+        </span>
+        <span aria-hidden className="text-[0.5em] leading-none">
+          0
+        </span>
+        <span aria-hidden className="text-[0.5em] leading-none">
+          2
+        </span>
       </span>
       <span className="text-white">
-        <span className="block text-[36px] md:text-[56px]">{month}</span>
-        <span className="block text-[36px] md:text-[56px]">{day}</span>
+        <span className="block">{month}</span>
+        <span className="block">{day}</span>
       </span>
     </p>
   );
@@ -18,7 +32,7 @@ function HeroDate({ month, day }: { month: string; day: string }) {
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[100dvh] overflow-hidden bg-[#0b0c0e]">
+    <section className="relative min-h-[calc(100dvh-11rem)] overflow-hidden bg-[#0b0c0e]">
       <video
         className="absolute inset-0 h-full w-full object-cover"
         autoPlay
@@ -31,7 +45,7 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20" />
       <div className="absolute inset-0 bg-gradient-to-t from-[#0b0c0e] via-transparent to-black/25" />
 
-      <div className="gf-container relative z-10 grid w-full grid-cols-1 content-center gap-10 pt-28 pb-16 md:min-h-[100dvh] md:grid-cols-[minmax(0,620px)_1fr] md:items-center md:pb-12">
+      <div className="gf-container relative z-10 grid w-full grid-cols-1 content-center gap-10 pt-28 pb-10 md:min-h-[calc(100dvh-11rem)] md:grid-cols-[minmax(0,620px)_1fr] md:items-center md:pb-8">
         <div>
           <p className="text-[12px] font-medium tracking-[0.14em] text-white/80 uppercase md:text-[13px]">
             Miami · Private Executive Dinner · September & October 2026
@@ -45,30 +59,35 @@ export function HeroSection() {
             Marketing leaders, on what it actually takes to move AI from
             ambition to measurable business impact. No vendor slides. No pitch.
           </p>
-          <div className="mt-5 max-w-[48ch] text-[14px] leading-[1.5] text-white/80 md:text-[15px]">
+          {/* <div className="mt-5 max-w-[48ch] text-[14px] leading-[1.5] text-white/80 md:text-[15px]">
             <p className="font-medium text-white">COTE Miami: Private Gold Room</p>
             <p>America&apos;s first and only Michelin-starred Korean Steakhouse</p>
             <p className="mt-1">
               6:30 – 9:00 PM · Networking, moderated roundtable & dinner
             </p>
+          </div> */}
+          <div className="mt-6 flex w-fit flex-col items-stretch">
+            <LimeCta
+              href="#cta"
+              className="h-[37px] min-h-[37px] min-w-full px-6 text-[14px]"
+            >
+              Request an Invitation
+            </LimeCta>
+            <ul className="mt-3 flex w-max flex-col gap-1 text-[13px] text-white/75 sm:flex-row sm:items-center sm:gap-5">
+              <li className="flex min-h-11 items-center gap-2">
+                <span className="text-gf-lime">
+                  <SeatsIcon />
+                </span>
+                12 seats per evening
+              </li>
+              <li className="flex min-h-11 items-center gap-2">
+                <span className="text-gf-lime">
+                  <CheckIcon />
+                </span>
+                Reviewed for fit
+              </li>
+            </ul>
           </div>
-          <LimeCta href="#cta" className="mt-6 h-11 min-h-11 px-6 text-[14px]">
-            Request an Invitation
-          </LimeCta>
-          <ul className="mt-3 flex flex-col gap-1 text-[13px] text-white/75 sm:flex-row sm:flex-wrap sm:items-center sm:gap-5">
-            <li className="flex min-h-11 items-center gap-2">
-              <span className="text-gf-lime">
-                <SeatsIcon />
-              </span>
-              12 seats per evening
-            </li>
-            <li className="flex min-h-11 items-center gap-2">
-              <span className="text-gf-lime">
-                <CheckIcon />
-              </span>
-              Reviewed for fit
-            </li>
-          </ul>
         </div>
 
         <div className="flex items-end justify-end md:self-end">
