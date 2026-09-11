@@ -5,10 +5,10 @@ import { ASSET } from "@/lib/growthforia/content";
 import { CloseIcon, MenuIcon } from "../shared/icons";
 
 const links = [
-  { href: "#speakers", label: "Speakers" },
+  { href: "#speakers", label: "Moderators" },
   { href: "#program", label: "Program" },
   { href: "#location", label: "Location" },
-  { href: "/2025", label: "past event", external: true },
+  { href: "#newsletter", label: "Request an Invitation" },
 ];
 
 export function SiteHeader() {
