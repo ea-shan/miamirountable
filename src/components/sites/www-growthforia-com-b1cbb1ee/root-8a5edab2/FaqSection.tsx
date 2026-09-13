@@ -13,7 +13,7 @@ export function FaqSection() {
         <h2 className="text-center text-[40px] leading-[1.1] font-medium md:text-[48px] md:leading-[52.8px]">
           The <span className="gf-italic">FAQ</span>
         </h2>
-        <div className="mx-auto mt-12 flex max-w-[1040px] flex-col gap-3">
+        <div className="mt-12 flex flex-col gap-3">
           {faqs.map((item, i) => {
             const expanded = open === i;
             return (
@@ -22,7 +22,7 @@ export function FaqSection() {
                 type="button"
                 aria-expanded={expanded}
                 onClick={() => setOpen(expanded ? -1 : i)}
-                className={`flex w-full cursor-pointer items-start gap-4 rounded-[28px] px-5 py-3.5 text-left transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gf-lime md:px-6 md:py-4 ${
+                className={`flex w-full cursor-pointer items-start gap-4 rounded-gf-btn px-5 py-3.5 text-left transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gf-lime md:px-6 md:py-4 ${
                   expanded
                     ? "bg-[#f6f3f0] text-[#0b0c0e]"
                     : "bg-[#121316] text-white hover:bg-[#f6f3f0] hover:text-[#0b0c0e]"

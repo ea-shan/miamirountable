@@ -5,7 +5,7 @@ export function SpeakersSection() {
     <section id="speakers" className="bg-[#0b0c0e] py-20 md:py-[80px]">
       <div className="gf-container">
         <h2 className="text-center text-[40px] leading-[1.1] font-medium md:text-[48px] md:leading-[52.8px]">
-          The <span className="gf-italic">moderators</span>
+          The <span className="gf-italic">Moderators</span>
         </h2>
         <div className="mt-12 flex flex-wrap justify-center gap-4">
           {speakers.map((speaker) => (

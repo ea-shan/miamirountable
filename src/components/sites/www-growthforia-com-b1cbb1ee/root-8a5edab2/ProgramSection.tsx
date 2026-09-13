@@ -4,10 +4,10 @@ export function ProgramSection() {
   return (
     <section id="program" className="bg-[#0b0c0e] py-20 md:py-[80px]">
       <div className="gf-container">
-        <h2 className="font-display text-[32px] leading-[1.1] tracking-[-0.03em] text-white md:text-[48px]">
-          Topics to Be Covered
+        <h2 className="text-center text-[40px] leading-[1.1] font-medium md:text-[48px] md:leading-[52.8px]">
+          The <span className="gf-italic">program</span>
         </h2>
-        <p className="mt-4 max-w-[62ch] text-[16px] leading-[1.6] text-white/80 md:text-[18px]">
+        <p className="mx-auto mt-4 max-w-[62ch] text-center text-[16px] leading-[1.6] text-white/80 md:text-[18px]">
           Six questions shaping the conversation, not a fixed agenda, but the
           terrain the discussion will move across.
         </p>

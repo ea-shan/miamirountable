@@ -6,10 +6,11 @@ export function LogoMarquee() {
 
   return (
     <section
-      className="bg-[#0b0c0e] px-[calc(var(--gf-rail)+1px)] py-3"
+      className="bg-[#0b0c0e] py-3"
       id="quotes"
       aria-label="Quotes on AI readiness"
     >
+      <div className="gf-container">
       <figure className="overflow-hidden rounded-gf-btn bg-[#ff003b] px-6 py-7 text-center md:px-12 md:py-8">
         <blockquote className="flex items-center justify-center gap-3 md:gap-4">
           <span className="shrink-0 text-white" aria-hidden>
@@ -30,6 +31,7 @@ export function LogoMarquee() {
           {quote.cite}
         </figcaption>
       </figure>
+      </div>
     </section>
   );
 }
