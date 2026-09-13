@@ -5,7 +5,7 @@ export function ProgramSection() {
     <section id="program" className="bg-[#0b0c0e] py-20 md:py-[80px]">
       <div className="gf-container">
         <h2 className="text-center text-[40px] leading-[1.1] font-medium md:text-[48px] md:leading-[52.8px]">
-          The <span className="gf-italic">program</span>
+          The <span className="gf-italic">Program</span>
         </h2>
         <p className="mx-auto mt-4 max-w-[62ch] text-center text-[16px] leading-[1.6] text-white/80 md:text-[18px]">
           Six questions shaping the conversation, not a fixed agenda, but the
