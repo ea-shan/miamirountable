@@ -8,7 +8,7 @@ export function SiteFooter() {
         </p>
       </div>
       <div className="gf-container mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-[13px] text-white/45 md:flex-row md:justify-between">
-        <p>Express Analytics . Miami Executive Roundtable Series · 2026</p>
+        <p>&copy; {new Date().getFullYear()} Express Analytics. Miami Executive Roundtable Series. All rights reserved.</p>
         <p>
           <a href="https://www.expressanalytics.com/privacy" className="hover:text-white">
             Privacy policy

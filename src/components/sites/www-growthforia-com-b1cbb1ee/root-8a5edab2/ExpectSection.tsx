@@ -33,7 +33,7 @@ export function ExpectSection() {
             >
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_42%_38%_at_94%_108%,rgba(255,0,59,0.28),transparent_62%)]"
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_46%_at_94%_108%,rgba(255,0,59,0.42),transparent_68%)]"
               />
               <p className="font-display relative text-[56px] leading-none tracking-[-0.04em] text-white md:text-[64px]">
                 {frame.n}
@@ -61,4 +61,5 @@ export function ExpectSection() {
     </section>
   );
 }
+
 
