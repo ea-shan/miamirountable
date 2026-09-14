@@ -232,35 +232,32 @@ export function NewsletterSection() {
   return (
     <section
       id="cta"
-      className="scroll-mt-24 bg-[#0b0c0e] py-3"
+      className="scroll-mt-24 bg-[#0b0c0e] py-20 md:py-[80px]"
     >
       <div className="gf-container">
-      <div className="relative overflow-hidden rounded-gf-btn bg-[#ff003b] px-6 py-12 text-white md:px-12 md:py-16">
-        <div className="relative grid items-start gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
-        <div>
+        <div className="text-center">
           <p className="text-[12px] font-medium tracking-[0.16em] text-white/70 uppercase">
             Twelve seats · COTE Miami
           </p>
-          <h2 className="font-display mt-4 max-w-[12ch] text-[40px] leading-[1.05] tracking-[-0.03em] text-white md:text-[56px]">
-            What happens next
+          <h2 className="font-display mx-auto mt-4 max-w-[16ch] text-[40px] leading-[1.05] tracking-[-0.03em] text-white md:text-[56px]">
+            What happens <span className="gf-italic">next</span>
           </h2>
-          <ol className="mt-8 space-y-6">
-            {NEXT.map((item) => (
-              <li key={item.n} className="grid grid-cols-[auto_1fr] gap-4">
-                <span className="font-display text-[22px] leading-none tracking-[-0.04em] text-white">
-                  {item.n}
-                </span>
-                <div>
-                  <p className="text-[16px] font-medium text-white">{item.title}</p>
-                  <p className="mt-1 max-w-[42ch] text-[14px] leading-[1.55] text-white/75">
-                    {item.body}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ol>
         </div>
+        <ol className="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-8">
+          {NEXT.map((item) => (
+            <li key={item.n} className="text-center">
+              <span className="font-display text-[22px] leading-none tracking-[-0.04em] text-white">
+                {item.n}
+              </span>
+              <p className="mt-3 text-[16px] font-medium text-white">{item.title}</p>
+              <p className="mx-auto mt-1 max-w-[42ch] text-[14px] leading-[1.55] text-white/75">
+                {item.body}
+              </p>
+            </li>
+          ))}
+        </ol>
 
+        <div className="relative mx-auto mt-12 w-full max-w-[640px] overflow-hidden rounded-gf-btn bg-[#ff003b] px-6 py-12 text-white md:mt-16 md:px-12 md:py-16">
         <div>
           {sent ? (
             <div className="py-6">
@@ -285,18 +282,16 @@ export function NewsletterSection() {
                       className={`grid size-7 place-items-center rounded-full text-[11px] font-medium ${
                         step === s.n
                           ? "bg-white text-[#0b0c0e]"
-                          : step > s.n
-                            ? "bg-white/25 text-white"
-                            : "bg-white/15 text-white/55"
+                          : "bg-white/25 text-white"
                       }`}
                     >
                       {s.n}
                     </span>
-                    <span className="hidden text-[12px] text-white/70 sm:inline">
+                    <span className="hidden text-[12px] font-medium text-white sm:inline">
                       {s.label}
                     </span>
                     {i < STEPS.length - 1 ? (
-                      <span className="h-px flex-1 bg-white/25" />
+                      <span className="h-px flex-1 bg-white/50" />
                     ) : null}
                   </div>
                 ))}
@@ -323,10 +318,10 @@ export function NewsletterSection() {
                       onChange={(e) => setEvening(e.target.value)}
                       aria-invalid={Boolean(errors.evening)}
                       aria-describedby={errors.evening ? `${uid}-evening-error` : undefined}
-                      className={`${fieldClass} cursor-pointer appearance-none pr-12`}
+                      className={`${fieldClass} cursor-pointer appearance-none pr-12 scheme-light`}
                     >
                       {EVENINGS.map((d) => (
-                        <option key={d} value={d}>
+                        <option key={d} value={d} className="bg-white text-[#0b0c0e]">
                           {d}
                         </option>
                       ))}
@@ -593,12 +588,12 @@ export function NewsletterSection() {
                   className={`flex h-11 min-h-11 items-center justify-center text-[14px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
                     step === 1
                       ? "invisible"
-                      : "cursor-pointer text-white/70 hover:text-white"
+                      : "cursor-pointer text-white hover:text-white"
                   }`}
                 >
                   Back
                 </button>
-                <p className="text-center text-[12px] leading-relaxed text-white/70">
+                <p className="text-center text-[12px] leading-relaxed text-white">
                   Reviewed within 48 hours for company fit, seniority and current
                   Data/AI priorities. You&apos;ll hear from Jorge&apos;s team
                   personally either way.
@@ -607,8 +602,7 @@ export function NewsletterSection() {
             </>
           )}
         </div>
-      </div>
-      </div>
+        </div>
       </div>
     </section>
   );

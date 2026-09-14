@@ -1,17 +1,30 @@
 export function SiteFooter() {
   return (
     <footer className="bg-[#0b0c0e] py-16 md:py-20">
-      <div className="gf-container">
-        <p className="mx-auto max-w-[68ch] text-center text-[15px] leading-[1.5] md:text-[17px]">
-          Attendance is curated based on company fit, seniority and current Data/AI
-          priorities. A member of our team will follow up on all requests.
-        </p>
-      </div>
-      <div className="gf-container mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-[13px] text-white/45 md:flex-row md:justify-between">
-        <p>&copy; {new Date().getFullYear()} Express Analytics. Miami Executive Roundtable Series. All rights reserved.</p>
-        <p>
-          <a href="https://www.expressanalytics.com/privacy" className="hover:text-white">
+      <div className="gf-container flex flex-col gap-3 pt-6 text-[13px] text-white/45 md:flex-row md:justify-between">
+        <div className="flex flex-col gap-3">
+          <p>
+            &copy; {new Date().getFullYear()} Express Analytics. Miami
+            Executive Roundtable Series. All rights reserved.
+          </p>
+          <p className="leading-[1.5] text-white/70">
+            Attendance is curated based on company fit, seniority and current
+            Data/AI priorities. A member of our team will follow up on all
+            requests.
+          </p>
+        </div>
+        <p className="flex flex-wrap gap-x-4 gap-y-1">
+          <a
+            href="https://www.expressanalytics.com/privacy"
+            className="hover:text-white"
+          >
             Privacy policy
+          </a>
+          <a
+            href="https://www.expressanalytics.com/terms"
+            className="hover:text-white"
+          >
+            Terms &amp; Conditions
           </a>
         </p>
       </div>

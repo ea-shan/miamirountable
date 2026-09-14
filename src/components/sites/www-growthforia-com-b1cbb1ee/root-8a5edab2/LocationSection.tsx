@@ -11,7 +11,7 @@ export function LocationSection() {
           The <span className="gf-italic">Location</span>
         </h2>
         
-        <div className="relative overflow-hidden">
+        <div className="relative mt-12 overflow-hidden">
           <img
             src={photo}
             alt="Private Gold Room table facing the fireplace, set for twelve"
@@ -56,3 +56,4 @@ export function LocationSection() {
     </section>
   );
 }
+

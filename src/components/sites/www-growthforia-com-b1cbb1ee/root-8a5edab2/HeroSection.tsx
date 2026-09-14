@@ -10,9 +10,6 @@ function HeroDate({ month, day }: { month: string; day: string }) {
         className="grid h-[2em] grid-rows-4 text-gf-lime"
       >
         <span aria-hidden className="text-[0.5em] leading-none">
-          6
-        </span>
-        <span aria-hidden className="text-[0.5em] leading-none">
           2
         </span>
         <span aria-hidden className="text-[0.5em] leading-none">
@@ -20,6 +17,9 @@ function HeroDate({ month, day }: { month: string; day: string }) {
         </span>
         <span aria-hidden className="text-[0.5em] leading-none">
           2
+        </span>
+        <span aria-hidden className="text-[0.5em] leading-none">
+          6
         </span>
       </span>
       <span className="text-white">
