@@ -2,12 +2,12 @@ export function SiteFooter() {
   return (
     <footer className="bg-[#0b0c0e] py-16 md:py-20">
       <div className="gf-container flex flex-col gap-3 pt-6 text-[13px] text-white/45 md:flex-row md:justify-between">
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-1">
           <p>
             &copy; {new Date().getFullYear()} Express Analytics. Miami
             Executive Roundtable Series. All rights reserved.
           </p>
-          <p className="leading-[1.5] text-white/70">
+          <p className="leading-[1.5]">
             Attendance is curated based on company fit, seniority and current
             Data/AI priorities. A member of our team will follow up on all
             requests.

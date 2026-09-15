@@ -236,9 +236,9 @@ export function NewsletterSection() {
     >
       <div className="gf-container">
         <div className="text-center">
-          <p className="text-[12px] font-medium tracking-[0.16em] text-white/70 uppercase">
+          {/* <p className="text-[12px] font-medium tracking-[0.16em] text-white/70 uppercase">
             Twelve seats · COTE Miami
-          </p>
+          </p> */}
           <h2 className="font-display mx-auto mt-4 max-w-[16ch] text-[40px] leading-[1.05] tracking-[-0.03em] text-white md:text-[56px]">
             What happens <span className="gf-italic">next</span>
           </h2>
@@ -275,9 +275,9 @@ export function NewsletterSection() {
             </div>
           ) : (
             <>
-              <div className="mb-5 flex items-center gap-2">
+              <div className="mb-5 flex items-center justify-center gap-2">
                 {STEPS.map((s, i) => (
-                  <div key={s.n} className="flex flex-1 items-center gap-2">
+                  <div key={s.n} className="flex items-center justify-center gap-2">
                     <span
                       className={`grid size-7 place-items-center rounded-full text-[11px] font-medium ${
                         step === s.n
@@ -291,7 +291,7 @@ export function NewsletterSection() {
                       {s.label}
                     </span>
                     {i < STEPS.length - 1 ? (
-                      <span className="h-px flex-1 bg-white/50" />
+                      <span className="h-px w-10 bg-white/50 sm:w-14" />
                     ) : null}
                   </div>
                 ))}
@@ -549,13 +549,13 @@ export function NewsletterSection() {
                 </p>
               ) : null}
 
-              <div className="mt-6 flex flex-col gap-3">
+              <div className="mt-6 flex flex-col items-center gap-3">
                 {step === 3 && fitStep === 3 ? (
                   <button
                     type="button"
                     onClick={onSubmit}
                     disabled={pending}
-                    className="flex h-11 min-h-11 cursor-pointer items-center justify-center rounded-gf-btn bg-[#0b0c0e] text-[15px] font-semibold text-white transition duration-200 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+                    className="flex h-11 min-h-11 w-full cursor-pointer items-center justify-center rounded-gf-btn bg-[#0b0c0e] text-[15px] font-semibold text-white transition duration-200 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {pending ? "Sending…" : "Request an Invitation"}
                   </button>
@@ -569,7 +569,7 @@ export function NewsletterSection() {
                       }
                       if (validateFit(fitStep)) setFitStep((n) => (n + 1) as FitStep);
                     }}
-                    className="flex h-11 min-h-11 cursor-pointer items-center justify-center rounded-gf-btn bg-[#0b0c0e] text-[15px] font-semibold text-white transition duration-200 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.98]"
+                    className="flex h-11 min-h-11 w-full cursor-pointer items-center justify-center rounded-gf-btn bg-[#0b0c0e] text-[15px] font-semibold text-white transition duration-200 hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.98]"
                   >
                     Continue
                   </button>

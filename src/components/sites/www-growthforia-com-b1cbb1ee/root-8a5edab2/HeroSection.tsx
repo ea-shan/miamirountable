@@ -7,7 +7,7 @@ function HeroDate({ month, day }: { month: string; day: string }) {
     <p className="flex items-start gap-1.5 font-display text-[36px] leading-none md:text-[56px]">
       <span
         aria-label="2026"
-        className="grid h-[2em] grid-rows-4 text-gf-lime"
+        className="grid h-[2em] grid-rows-4 font-bold text-gf-lime"
       >
         <span aria-hidden className="text-[0.5em] leading-none">
           2
