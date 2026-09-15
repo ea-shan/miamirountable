@@ -29,8 +29,20 @@ export const metadata: Metadata = {
     "data and AI leaders",
   ],
   icons: {
-    icon: "/sites/www-growthforia-com-b1cbb1ee/root-8a5edab2/logos/ea-logo-red.png",
-    apple: "/sites/www-growthforia-com-b1cbb1ee/root-8a5edab2/logos/ea-logo-red.png",
+    icon: [
+      {
+        url: "/sites/www-growthforia-com-b1cbb1ee/root-8a5edab2/logos/favicon-32.png",
+        sizes: "32x32",
+        type: "image/png",
+      },
+      {
+        url: "/sites/www-growthforia-com-b1cbb1ee/root-8a5edab2/logos/favicon-48.png",
+        sizes: "48x48",
+        type: "image/png",
+      },
+    ],
+    apple:
+      "/sites/www-growthforia-com-b1cbb1ee/root-8a5edab2/logos/apple-touch-icon.png",
   },
 };
 
@@ -65,5 +77,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </html>
   );
 }
+
 
 
