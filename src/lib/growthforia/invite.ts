@@ -1,6 +1,5 @@
-export const HS_PORTAL_ID = "287495";
-export const HS_FORM_ID = "bab2b362-d82c-47da-b62e-f09f855d17ef";
-export const HS_SUBMIT_URL = `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${HS_FORM_ID}`;
+export const HS_PORTAL_ID_DEFAULT = "287495";
+export const HS_FORM_ID_DEFAULT = "bab2b362-d82c-47da-b62e-f09f855d17ef";
 
 export const EVENINGS = [
   "Thursday, September 24, 2026",
@@ -162,3 +161,4 @@ export function toHubSpotFields(data: InviteInput) {
   }
   return rows;
 }
+

@@ -2,7 +2,8 @@
 
 import { cookies, headers } from "next/headers";
 import {
-  HS_SUBMIT_URL,
+  HS_FORM_ID_DEFAULT,
+  HS_PORTAL_ID_DEFAULT,
   parseInvite,
   toHubSpotFields,
   type FieldErrors,
@@ -12,8 +13,18 @@ export type InviteResult =
   | { ok: true }
   | { ok: false; error: string; fields?: FieldErrors };
 
+function hubSpotSubmitUrl() {
+  const portal = process.env.HUBSPOT_PORTAL_ID || HS_PORTAL_ID_DEFAULT;
+  const formId = process.env.HUBSPOT_FORM_ID || HS_FORM_ID_DEFAULT;
+  const host =
+    process.env.HUBSPOT_REGION === "eu1"
+      ? "https://api.hsforms.eu"
+      : "https://api.hsforms.com";
+  return `${host}/submissions/v3/integration/submit/${portal}/${formId}`;
+}
+
 async function postHubSpot(body: string) {
-  return fetch(HS_SUBMIT_URL, {
+  return fetch(hubSpotSubmitUrl(), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body,
@@ -53,3 +64,4 @@ export async function submitInvite(raw: unknown): Promise<InviteResult> {
   }
   return { ok: true };
 }
+
