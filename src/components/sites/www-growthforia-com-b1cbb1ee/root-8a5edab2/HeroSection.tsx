@@ -1,5 +1,5 @@
-import { ASSET, HERO_VIDEO } from "@/lib/growthforia/content";
 import { CheckIcon, SeatsIcon } from "../shared/icons";
+import { HeroVideo } from "./HeroVideo";
 import { LimeCta } from "./LimeCta";
 
 function HeroDate({ month, day }: { month: string; day: string }) {
@@ -33,15 +33,7 @@ function HeroDate({ month, day }: { month: string; day: string }) {
 export function HeroSection() {
   return (
     <section className="relative min-h-[calc(100dvh-11rem)] overflow-hidden bg-[#0b0c0e]">
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        // poster={`${ASSET}/images/hero-poster.jpg`}
-        src={HERO_VIDEO}
-      />
+      <HeroVideo />
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20" />
       <div className="absolute inset-0 bg-gradient-to-t from-[#0b0c0e] via-transparent to-black/25" />
 

@@ -35,18 +35,18 @@ export function SiteHeader() {
               <span className="text-white"> analytics</span>
             </span>
           </a>
-          <nav className="hidden items-center gap-4 pr-2 lg:flex" aria-label="Primary">
-            {links.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="cursor-pointer py-1.5 text-[13px] font-medium uppercase tracking-[0.06em] text-white/90 transition-colors duration-200 hover:text-gf-lime focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gf-lime"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-          <div className="hidden lg:block">
+          <div className="hidden items-center gap-4 lg:flex">
+            <nav className="flex items-center gap-4" aria-label="Primary">
+              {links.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="cursor-pointer py-1.5 text-[13px] font-medium uppercase tracking-[0.06em] text-white/90 transition-colors duration-200 hover:text-gf-lime focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gf-lime"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
             <LimeCta
               href="#cta"
               className="h-[37px] min-h-[37px] px-5 text-[13px]"
@@ -93,4 +93,5 @@ export function SiteHeader() {
     </header>
   );
 }
+
 

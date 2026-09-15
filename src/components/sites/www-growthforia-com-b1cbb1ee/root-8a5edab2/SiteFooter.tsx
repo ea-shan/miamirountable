@@ -1,7 +1,7 @@
 export function SiteFooter() {
   return (
-    <footer className="bg-[#0b0c0e] py-16 md:py-20">
-      <div className="gf-container flex flex-col gap-3 pt-6 text-[13px] text-white/45 md:flex-row md:justify-between">
+    <footer className="bg-[#0b0c0e] py-3">
+      <div className="gf-container flex flex-col gap-3 text-[13px] text-white/45 md:flex-row md:items-start md:justify-between">
         <div className="flex flex-col gap-1">
           <p>
             &copy; {new Date().getFullYear()} Express Analytics. Miami
