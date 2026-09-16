@@ -11,29 +11,30 @@ export function LogoMarquee() {
       aria-label="Quotes on AI readiness"
     >
       <div className="gf-container">
-      <figure className="overflow-hidden rounded-gf-btn bg-[#ff003b] px-6 py-7 text-center md:px-12 md:py-8">
-        <blockquote>
+        <figure className="overflow-hidden rounded-gf-btn bg-[#ff003b] px-6 py-7 text-center md:px-12 md:py-8">
+          <blockquote>
             <p className="font-display text-[16px] leading-[1.45] text-white italic md:text-[17px]">
-            <span className="mr-1.5 inline-block align-[-0.2em] [&_svg]:h-5 [&_svg]:w-5 md:[&_svg]:h-6 md:[&_svg]:w-6" aria-hidden>
-              <QuoteIcon />
-            </span>
-            {quote.text}
-            <span
-              className="ml-1.5 inline-block align-[-0.2em] [&_svg]:h-5 [&_svg]:w-5 md:[&_svg]:h-6 md:[&_svg]:w-6"
-              aria-hidden
-              style={{ transform: "scaleX(-1)" }}
-            >
-              <QuoteIcon />
-            </span>
-          </p>
-        </blockquote>
-        <figcaption className="mt-2 text-[12px] font-medium tracking-[0.1em] text-white/80 uppercase md:text-[13px]">
-          {quote.cite}
-        </figcaption>
-      </figure>
+              <span className="mr-1.5 inline-block align-[-0.2em] [&_svg]:h-5 [&_svg]:w-5 md:[&_svg]:h-6 md:[&_svg]:w-6" aria-hidden>
+                <QuoteIcon />
+              </span>
+              {quote.text}
+              <span
+                className="ml-1.5 inline-block align-[-0.2em] [&_svg]:h-5 [&_svg]:w-5 md:[&_svg]:h-6 md:[&_svg]:w-6"
+                aria-hidden
+                style={{ transform: "scaleX(-1)" }}
+              >
+                <QuoteIcon />
+              </span>
+            </p>
+          </blockquote>
+          <figcaption className="mt-2 text-[12px] font-medium tracking-[0.1em] text-white/80 uppercase md:text-[13px]">
+            {quote.cite}
+          </figcaption>
+        </figure>
       </div>
     </section>
   );
 }
+
 
 
