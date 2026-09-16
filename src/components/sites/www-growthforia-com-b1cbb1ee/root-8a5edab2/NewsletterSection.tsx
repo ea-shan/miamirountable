@@ -41,6 +41,56 @@ const NEXT = [
 const fieldClass =
   "h-11 min-h-11 w-full rounded-md bg-white px-4 text-[16px] text-[#0b0c0e] placeholder:text-[#0b0c0e]/40 outline-none transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b0c0e]";
 
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function liveMessage(
+  field: keyof FieldErrors,
+  value: string,
+  priorities?: string[],
+): string | undefined {
+  switch (field) {
+    case "evening":
+      return EVENINGS.includes(value as (typeof EVENINGS)[number])
+        ? undefined
+        : "Required: choose Thursday, September 24 or Wednesday, October 14, 2026.";
+    case "firstname":
+      return value.trim() ? undefined : "Required: first name.";
+    case "lastname":
+      return value.trim() ? undefined : "Required: last name.";
+    case "company":
+      return value.trim() ? undefined : "Required: company name.";
+    case "workEmail":
+      return EMAIL.test(value.trim())
+        ? undefined
+        : "Required: a valid work email (name@company.com).";
+    case "jobtitle":
+      return value.trim() ? undefined : "Required: job title.";
+    case "city":
+      return value.trim() ? undefined : "Required: city / metro area.";
+    case "linkedinUrl":
+      if (!value.trim()) return undefined;
+      try {
+        const u = new URL(value.trim());
+        if (u.protocol === "http:" || u.protocol === "https:") return undefined;
+      } catch {
+        /* invalid */
+      }
+      return "Optional: full LinkedIn URL starting with https://.";
+    case "readiness":
+      return value ? undefined : "Required: select your Data & AI readiness.";
+    case "priorities": {
+      const n = priorities?.length ?? 0;
+      return n >= 1 && n <= 2
+        ? undefined
+        : "Required: select 1–2 strategic priorities.";
+    }
+    case "outcome":
+      return value ? undefined : "Required: select a primary business outcome.";
+    default:
+      return undefined;
+  }
+}
+
 function Field({
   id,
   label,
@@ -137,6 +187,20 @@ export function NewsletterSection() {
   const [priorities, setPriorities] = useState<string[]>([]);
   const [outcome, setOutcome] = useState("");
 
+  function setLive(
+    field: keyof FieldErrors,
+    value: string,
+    nextPriorities?: string[],
+  ) {
+    const msg = liveMessage(field, value, nextPriorities);
+    setErrors((prev) => {
+      const next = { ...prev };
+      if (msg) next[field] = msg;
+      else delete next[field];
+      return next;
+    });
+  }
+
   function go(next: Step) {
     setErrors({});
     setFormError("");
@@ -194,9 +258,13 @@ export function NewsletterSection() {
 
   function togglePriority(value: string) {
     setPriorities((cur) => {
-      if (cur.includes(value)) return cur.filter((v) => v !== value);
-      if (cur.length >= 2) return cur;
-      return [...cur, value];
+      const next = cur.includes(value)
+        ? cur.filter((v) => v !== value)
+        : cur.length >= 2
+          ? cur
+          : [...cur, value];
+      setLive("priorities", "", next);
+      return next;
     });
   }
 
@@ -239,7 +307,7 @@ export function NewsletterSection() {
           {/* <p className="text-[12px] font-medium tracking-[0.16em] text-white/70 uppercase">
             Twelve seats · COTE Miami
           </p> */}
-          <h2 className="font-display mx-auto mt-4 max-w-[16ch] text-[40px] leading-[1.05] tracking-[-0.03em] text-white md:text-[56px]">
+          <h2 className="font-display mx-auto mt-4 whitespace-nowrap text-[40px] leading-[1.05] tracking-[-0.03em] text-white md:text-[56px]">
             What happens <span className="gf-italic">next</span>
           </h2>
         </div>
@@ -315,7 +383,10 @@ export function NewsletterSection() {
                     <select
                       id={`${uid}-evening`}
                       value={evening}
-                      onChange={(e) => setEvening(e.target.value)}
+                      onChange={(e) => {
+                        setEvening(e.target.value);
+                        setLive("evening", e.target.value);
+                      }}
                       aria-invalid={Boolean(errors.evening)}
                       aria-describedby={errors.evening ? `${uid}-evening-error` : undefined}
                       className={`${fieldClass} cursor-pointer appearance-none pr-12 scheme-light`}
@@ -351,7 +422,10 @@ export function NewsletterSection() {
                         autoComplete="given-name"
                         required
                         value={firstname}
-                        onChange={(e) => setFirstname(e.target.value)}
+                        onChange={(e) => {
+                          setFirstname(e.target.value);
+                          setLive("firstname", e.target.value);
+                        }}
                         placeholder="First name"
                         aria-invalid={Boolean(errors.firstname)}
                         className={fieldClass}
@@ -363,7 +437,10 @@ export function NewsletterSection() {
                         autoComplete="family-name"
                         required
                         value={lastname}
-                        onChange={(e) => setLastname(e.target.value)}
+                        onChange={(e) => {
+                          setLastname(e.target.value);
+                          setLive("lastname", e.target.value);
+                        }}
                         placeholder="Last name"
                         aria-invalid={Boolean(errors.lastname)}
                         className={fieldClass}
@@ -376,7 +453,10 @@ export function NewsletterSection() {
                           autoComplete="organization"
                           required
                           value={company}
-                          onChange={(e) => setCompany(e.target.value)}
+                          onChange={(e) => {
+                            setCompany(e.target.value);
+                            setLive("company", e.target.value);
+                          }}
                           placeholder="Company"
                           className={fieldClass}
                         />
@@ -389,7 +469,10 @@ export function NewsletterSection() {
                         autoComplete="email"
                         required
                         value={workEmail}
-                        onChange={(e) => setWorkEmail(e.target.value)}
+                        onChange={(e) => {
+                          setWorkEmail(e.target.value);
+                          setLive("workEmail", e.target.value);
+                        }}
                         placeholder="Work email"
                         className={fieldClass}
                       />
@@ -400,7 +483,10 @@ export function NewsletterSection() {
                         autoComplete="organization-title"
                         required
                         value={jobtitle}
-                        onChange={(e) => setJobtitle(e.target.value)}
+                        onChange={(e) => {
+                          setJobtitle(e.target.value);
+                          setLive("jobtitle", e.target.value);
+                        }}
                         placeholder="Job title"
                         className={fieldClass}
                       />
@@ -412,7 +498,10 @@ export function NewsletterSection() {
                           autoComplete="address-level2"
                           required
                           value={city}
-                          onChange={(e) => setCity(e.target.value)}
+                          onChange={(e) => {
+                            setCity(e.target.value);
+                            setLive("city", e.target.value);
+                          }}
                           placeholder="City / metro area"
                           className={fieldClass}
                         />
@@ -439,7 +528,10 @@ export function NewsletterSection() {
                         type="url"
                         autoComplete="url"
                         value={linkedinUrl}
-                        onChange={(e) => setLinkedinUrl(e.target.value)}
+                        onChange={(e) => {
+                          setLinkedinUrl(e.target.value);
+                          setLive("linkedinUrl", e.target.value);
+                        }}
                         placeholder="LinkedIn URL (optional)"
                         className={fieldClass}
                       />
@@ -477,7 +569,10 @@ export function NewsletterSection() {
                             name="readiness"
                             type="radio"
                             checked={readiness === opt}
-                            onChange={() => setReadiness(opt)}
+                            onChange={() => {
+                              setReadiness(opt);
+                              setLive("readiness", opt);
+                            }}
                           >
                             {opt}
                           </Choice>
@@ -527,7 +622,10 @@ export function NewsletterSection() {
                             name="outcome"
                             type="radio"
                             checked={outcome === opt}
-                            onChange={() => setOutcome(opt)}
+                            onChange={() => {
+                              setOutcome(opt);
+                              setLive("outcome", opt);
+                            }}
                           >
                             {opt}
                           </Choice>

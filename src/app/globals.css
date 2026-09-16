@@ -18,8 +18,8 @@
   --color-gf-olive: var(--gf-bg-olive);
   --color-gf-ink: var(--gf-ink);
   --color-gf-lime: var(--gf-lime);
-  --font-sans: var(--font-urbanist);
-  --font-display: var(--font-questrial);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-jetbrains-mono);
   --radius-gf-btn: 8px;
 }
 
@@ -30,7 +30,7 @@ html {
 body {
   background: var(--gf-bg);
   color: #fff;
-  font-family: var(--font-urbanist), sans-serif;
+  font-family: var(--font-inter), sans-serif;
   font-size: 16px;
   line-height: 1.2;
 }

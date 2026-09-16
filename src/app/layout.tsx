@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { Questrial, Urbanist } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
-const urbanist = Urbanist({
-  variable: "--font-urbanist",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
-const questrial = Questrial({
-  variable: "--font-questrial",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
-  weight: "400",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -50,12 +50,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${urbanist.variable} ${questrial.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <head>
         <link rel="preconnect" href="https://www.googletagmanager.com" />
       </head>
-      <body className={`${urbanist.className} min-h-full bg-gf-bg text-white`}>
+      <body className={`${inter.className} min-h-full bg-gf-bg text-white`}>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-5P5JDKHG"
