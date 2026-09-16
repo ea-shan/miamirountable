@@ -13,13 +13,13 @@ export function LogoMarquee() {
       <div className="gf-container">
       <figure className="overflow-hidden rounded-gf-btn bg-[#ff003b] px-6 py-7 text-center md:px-12 md:py-8">
         <blockquote>
-            <p className="font-display text-[16px] leading-[1.45] text-white italic md:text-[18px]">
-            <span className="mr-1.5 inline-block align-[-0.2em] [&_svg]:h-5 [&_svg]:w-5 md:[&_svg]:h-7 md:[&_svg]:w-7" aria-hidden>
+            <p className="font-display text-[16px] leading-[1.45] text-white italic md:text-[17px]">
+            <span className="mr-1.5 inline-block align-[-0.2em] [&_svg]:h-5 [&_svg]:w-5 md:[&_svg]:h-6 md:[&_svg]:w-6" aria-hidden>
               <QuoteIcon />
             </span>
             {quote.text}
             <span
-              className="ml-1.5 inline-block align-[-0.2em] [&_svg]:h-5 [&_svg]:w-5 md:[&_svg]:h-7 md:[&_svg]:w-7"
+              className="ml-1.5 inline-block align-[-0.2em] [&_svg]:h-5 [&_svg]:w-5 md:[&_svg]:h-6 md:[&_svg]:w-6"
               aria-hidden
               style={{ transform: "scaleX(-1)" }}
             >
@@ -35,4 +35,5 @@ export function LogoMarquee() {
     </section>
   );
 }
+
 
